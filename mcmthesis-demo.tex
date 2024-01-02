@@ -1,0 +1,1527 @@
+%%
+%% This is file `mcmthesis-demo.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mcmthesis.dtx  (with options: `demo')
+%%
+%% -----------------------------------
+%%
+%% This is a generated file.
+%%
+%% Copyright (C)
+%%       2010 -- 2015 by Zhaoli Wang
+%%       2014 -- 2019 by Liam Huang
+%%       2019 -- present by latexstudio.net
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Liam Huang.
+%%
+%%
+%% This is file `mcmthesis-demo.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mcmthesis.dtx  (with options: `demo')
+%%
+%% -----------------------------------
+%%
+%% This is a generated file.
+%%
+%% Copyright (C)
+%%       2010 -- 2015 by Zhaoli Wang
+%%       2014 -- 2019 by Liam Huang
+%%       2019 -- present by latexstudio.net
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Liam Huang.
+%%
+\documentclass{mcmthesis}
+\mcmsetup{CTeX = false,   % 使用 CTeX 套装时，设置为 true
+        tcn = 2301639, problem = A,
+        sheet = true, titleinsheet = true, keywordsinsheet = true,
+        titlepage = false, abstract = true}
+\usepackage{newtxtext}%\usepackage{palatino}
+\usepackage{lipsum}
+\usepackage{graphicx} 
+\usepackage{subfigure}
+\usepackage{setspace}
+\usepackage{hyperref}
+\newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
+\title{Analysis of Plant Community under Drought}
+\date{}
+
+\hypersetup{colorlinks=true,linkcolor=black}
+\begin{document}
+\begin{abstract}
+	
+\begin{spacing}{0.97}
+
+Drought  is considered as a major natural hazard, and the adaptability to drought varies greatly among plant communities. In this paper, we develop a model to simulate plant community succession under drought and obtain some pratical conclusions about the drought adaptation of plant communities.
+
+First, we collect the historical precipitation in a semiarid region and fit the distribution of precipitation to a gamma distribution using \textbf{maximum likelihood estimation}. By sampling the \textbf{gamma distribution}, we simulate irregular rainfall, which is close to reality. In addition, we develop a \textbf{vitality-rainfall model} to describe the relationship between plant reproduction rate and mortality rate as functions of rainfall. The unknown parameters in the vitality-rainfall model are calibrated by taking the quantile of the gamma distribution function.
+
+Second, we developed a reproduction-competition trade-off model to simulate plant community succession by analyzing the relationship between reproduction, mortality and competition of species. At the same time, we propose three indicators to quantitatively characterize the drought adaptation of species: species extinction rate, rate of change in total community abundance and changes in normalized Shannon-Weiner index.
+
+Third, we use the \textbf{fourth-order Runge-Kutta method} to predict the changes of plants under various irregular weather cycles. By varying the number of species, species type and frequency and severity of droughts,we can reach the following conclusions:
+
+\begin{itemize}
+	\item  Communities need at least six species to benefit from local diversity. 
+	\item  Communities with mixed perennial and annual distributions have better drought tolerance, and communities with all perennials are the least drought tolerant.
+	\item  Higher frequency and more severe droughts not only reduce the abundance of the vast majority of plants, but also make the community less stable, while lower frequency droughts enhance the community's resistance to drought.
+\end{itemize}
+
+Fourth, based on the \textbf{reproduction-competition trade-off model}, we explore the effects of habitat destruction on plant communities by changing the proportion of points within the community that are suitable for plant survival . We discover an interesting phenomenon: habitat destruction decreases the abundance of superior competitive species and even leads to their extinction.On the contrary, habitat distruction increases the abundance of inferior competitive species (even though the total survival space is reduced).
+
+Finally, we conduct a \textbf{sensitivity analysis} on two parameters. The one is the responsiveness of plant vitality to rainfall. The other one is rainfall thresholds. Additionally, we propose suggestions to improve the long-term viability of plant communities.
+
+\end{spacing}
+
+\begin{keywords}
+Plant Community Succession; Drought Adaptability; Gamma Distribution; The Reproduction-Competition Trade-off Model; Fourth-order Runge-Kutta Method
+\end{keywords}
+
+\end{abstract}
+
+\maketitle
+
+
+
+\setlength{\headsep}{25pt}
+\setlength{\footskip}{0pt}
+
+\begin{spacing}{0.1} %调整目录的行距
+\newpage
+\tableofcontents
+\end{spacing}
+
+%% Generate the Table of Contents, if it's needed.
+%% \tableofcontents
+%% \newpage
+%%
+%% Generate the Memorandum, if it's needed.
+%% \memoto{\LaTeX{}studio}
+%% \memofrom{Liam Huang}
+%% \memosubject{Happy \TeX{}ing!}
+%% \memodate{\today}
+%% \logo{\LARGE I'm pretending to be a LOGO!}
+%% \begin{memo}[Memorandum]
+%%   \lipsum[1-3]
+%% \end{memo}
+%%
+%\begin{spacing}{1.35}
+%\section{Introduction}
+
+
+%\subsection{Restatement of the Problem}
+%
+%On recreational sandy ocean beaches all over the world, we can see people building sand castles. While exerting their own artistic talents to make the sandcastle more beautiful, how do people make their masterpieces last as long as possible under the erosion of waves ? One needs to choose the right foundation shape, and the appropriate sand-to-water mixture proportion. Rain also affects the survival time of sandcastles.
+%
+%We're developing a mathematical model to choose the best building strategy for people. With the input of the three-dimensional shape of sand pile, the ratio of sand to water and the condition of rain, our model should be able to output the loss ratio of the sand pile within a certain period of time as an evaluation index. Based on the above understandings, we need to solve the following requirements:
+%\begin{itemize}
+%	\item {\bf Requirement 1:}\, A reasonable force analysis should be carried out, and a simulation model should be built, which describes the changing process of sand pile. Under the premise of other conditions being equal, simulate various three-dimensional shapes of sand piles to get the shape that last the longest on the beach.
+%	
+%	\item {\bf Requirement 2:}\, Use the model established in problem 1 to search for the optimal sand-to-water mixture proportion.
+%
+%	\item {\bf Requirement 3:}\, Adapt the model to raining conditions. Study how rain affects the best 3-dimentional sandcastle foundation and whether it remains the best.
+%	
+%	\item {\bf Requirement 4:}\, Expand our minds and discuss other factors that can make a sandcastle last longer.
+%	
+%	\item {\bf Requirement 5:}\, Write an easy-to-understand article for non-technical readers of Fun in the Sun that vividly describes the model and results.
+%\end{itemize}
+
+%\subsection{Literature Review}
+
+%Since the last century, optimization of strategy in cycling by establishing mathemtcial model has been the focus of many scholars in different fields. They have conducted a large quantity of experiments and put forward many models of athletic performances. 
+
+%{\bf Descriptive models: } Several descriptive models derived from empirical researches have been proposed. Kennelly proposed a power-law model (1906). Asymptotic hyperbolic models were proposed and discussed by Hill(1927) and Scherrer(1954). Péronnet and Thibault proposed a logarithmic model(1987). 3-parameter asymptotic models were proposed and studied by Hopkins(1989) and Morton(1996). 
+
+%{\bf Physiological models: } Péronnet and Thibault included fatigue, power, the anaerobic and aerobic metabolisms in their model. This is the most used physiologyical model so far.
+
+
+
+%\subsection{Our Work}
+%
+%The problem requires us to mathematically model the power of riders and design the optimal racing strategy with our model. Therefore, our work includes the following:
+%\newpage
+
+%\end{spacing}
+
+%\begin{figure}[htbp]
+%	\centering
+%	\includegraphics[width=12cm]{/Users/ivk1442/Pictures/R1_/ourwork.png}
+%	\caption{Our work} 
+%\end{figure}
+
+%\section{Assuptions and Justifications}
+%
+%Assumptions are made as follows to simplify the problem. Each of them is properly justified.
+%
+%\begin{itemize}
+%	\item {\bf Assumption1: The waves are sine waves and hit the shore at the same speed .}\\
+%	{\bf Justification:} The shallow water spectrum in the offshore area is mostly a mixed single-peak wave spectrum, which is too complicated for later modeling. As literature [4] says, assuming the waveform of offshore waves as a sine wave is reasonable.
+%	
+%	\item {\bf Assumption2: The effect of offshore wind on waves and sand castles is small and negligible. }\\
+%	{\bf Justification:} Since the sea area we study is offshore, and the wind speed in the offshore waters is low, the gentleness of the sea bottom near the beach is considered to be constant. Therefore, we ignore the effect of offshore wind speed on the wave speed and consider only the waves[4].
+%	
+%	\item {\bf Assumption3: The beach is gentle, and the slope is close to zero.} \\
+%	{\bf Justification:} The background of the problem is that people build sandcastles on the beach for recreation, and the popular beaches for recreation are mostly gentle, so we think the slope of the beach is very small, close to zero. 
+%	
+%	\item {\bf Assumption4: Tides are not taken into account.} \\
+%	{\bf Justification:} The tides often rise or fall by more than three metres, which is far above the height of a normal sandcastle. So the tides are likely to overwhelm the sandcastle for hours at a time and completely destroy it. Therefore, there is no point in considering the effects of tides.
+%	
+%	\item {\bf Assumption5:\, The sand pile system is in equilibrium state, so there is no hydraulic gradient inside the model.}\\
+%	{\bf Justification:} This assumption is generally valid in unsaturated sand or soil[1]. The range of sand-to-water proportion we study is consistent with the condition of unsaturated soil, so it is reasonable to make this assumption.
+%	
+%	\item {\bf Assumption6: The capillary water between sand grains is lenticular} \\
+%	{\bf Justification:} Literature[1] shows that in unsaturated soil, capillary water is in lenticular shape.
+%	
+%\end{itemize}
+
+
+
+%\section{The Data}
+%
+%The data we collect includes the course information, performance and physical data of several groups of cycling athletes, and kinetic parameters of the rider. %The data sources are listed in Table2.
+%%\begin{table}[h]  %h表示固定在当前位置
+%%	\centering        %设置居中
+%%	\caption{Database}  %表标题
+%%	\vspace{0.15cm}
+%%	\label{tab2}                       %设置表的引用标签
+%%	\begin{tabular}{|c|c|c|}  %3个c表示3列, |可选, 表示绘制各列间的竖线
+%%		\hline                    %画横线
+%%		Data Sources & Data Type     \\ \hline  %各列间用&隔开
+%%		https://olympics.com/olympic-games/tokyo-2020&Topographic Map\\ \hline
+%%		https://www.flanders2021.com&Topographic Map\\ \hline
+%%		https://www.webofscience.com&Academic Paper\\ \hline
+%%	\end{tabular}
+%%\end{table}
+%
+%We collected topographic maps of the 2021 Olympic Time Trial course and the 2021 UCI World Championship time trial course. We use Python to process the image file of the track to get the slope of the course in every section, as shown in the figure.
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=8cm]{olympic.jpg}
+%	\caption{Topographic map of the  2021 Olympic Time Trial course} 
+%\end{figure}
+%Taking the 2021 Olympic Time Trial course as an example, we read pixel points via python and divided the track into more than a thousand nodes so we can obtain the lateral and vertical distances of each one for further study.
+
+
+%\section{Notations}
+%
+%Notations are shown in Table1.
+%
+%\begin{table}[h]
+%	\begin{center}
+%		\caption{Notations}
+%		\begin{tabular}{ccc}
+%			\hline
+%			\makebox[0.05\textwidth][c]{Symbol}	&  \makebox[0.15\textwidth][c]{Description} &
+%			\makebox[0.05\textwidth][c]{Unit}\\ \hline
+%			$S_{x,y,z}^T$&he state of a cell with coordinates (x,y,z) at time t&None\\
+%			$W$&The number of water cells in the neighborhood of a cell&None\\
+%			$G$&The number of gravel(sand) cells in the neighborhood of a cell&None\\
+%			$E$&The number of empty cells in the neighborhood of a cell&None\\
+%			$F$&The force of a wave on a point on the sandpile&$N$\\
+%			$f_a$& The static friction force between two sand grains in direct contact&$N$\\
+%			$f_A$&The maximum static friction force between two sand grains in direct contact&$N$\\
+%			$F_a$&The resultant static frictional forces on a sand cell of other sand cells&$N$\\
+%			$f_s$&A capillary water force on a sand cell&$N$\\
+%			$F_s$&The resultant capillary water force on a sand cell&$N$\\
+%			$F_r$&The downward vertical impact of the raindrop on the sand cell&$N$\\
+%			$F_gx$&The resultant horizontal force of other grains on a gravel&$N$\\
+%			\hline
+%		\end{tabular}
+%	\end{center}
+%\end{table}
+
+\newpage
+
+\textbf{\section{Introduction}}
+
+
+\textbf{\subsection{Problem Background}}
+
+In recent years, global drought problem has become more and more severe, which has caused serious impact on human society and natural ecosystem. And as global climate change intensifies, the frequency and intensity of droughts are likely to increase further. 
+
+Countries around the world have devoted considerable resources to develop theories and methods to curb drought. Among all the researches, the relationship between drought adaptation and biodiversity of plant community has been one of the hottest topics.Increasing species extinction in recent years is also raising concerns about local biodiversity. 
+
+It has been proved that in many plant communities, the increase of species richness has a positive effect on drought resistance mechanism and drought adaptability of the community. To apply this effect to environmental protection or agricultural production practice, we need to understand the mechanism and detailed rules of this effect.We try to establish a model that considers irregular climate cycles, population iteration, interspecific interactions and other factors. We’ll explore the number of species, type of species, frequency and severity of drought. Finally, based on the results of the research, we’ll also propose practical measures and contribute our efforts to combat  global drought problem.
+
+%		\begin{itemize}
+	%			\item Describe the spread and characteristics of opioids in and between the given states and counties, analyze the characteristics of opioid spread, and find the source of opioid use cases.
+	%			\item If opioid cases continue to spread, determine the epidemic threshold for the government to take action and analyze where and when they will occur.
+	%			\item Analyze the correlation between the number of opioid cases and the socio-economic factors, then modify the model to include important factors.
+	%			\item Establish effective policies to prevent the spread of opioids and evaluate the effectiveness of policies.
+	%		\end{itemize}
+
+%\subsection{Literature Review}
+
+%Since the last century, optimization of strategy in cycling by establishing mathemtcial model has been the focus of many scholars in different fields. They have conducted a large quantity of experiments and put forward many models of athletic performances. 
+
+%{\bf Descriptive models: } Several descriptive models derived from empirical researches have been proposed. Kennelly proposed a power-law model (1906). Asymptotic hyperbolic models were proposed and discussed by Hill(1927) and Scherrer(1954). Péronnet and Thibault proposed a logarithmic model(1987). 3-parameter asymptotic models were proposed and studied by Hopkins(1989) and Morton(1996). 
+
+%{\bf Physiological models: } Péronnet and Thibault included fatigue, power, the anaerobic and aerobic metabolisms in their model. This is the most used physiologyical model so far.
+
+
+
+\textbf{\subsection{Literature Review}}
+
+The relationship between drought adaptability of plant communities and biodiversity has been a hot topic in the field of ecology. To obtain accurate and comprehensive conclusions, scholars have performed numerous researches on environmental conditions and plant communities modeling, using a variety if methods.
+
+\begin{itemize}
+	
+	\item \textbf{Regional rainfall modeling methods}
+	
+	\qquad
+	Mou, J. (2012) [1] used frequency analysis to sort and classify historical rainfall data, and then calculated the rainfall at different frequencies according to the probability distribution function. Zhang, X. et al. (2017)[2] used the extreme value distribution for local rainfall statistics. Tang, F. et al. (2020)[3] combined a meteorological model to physically simulate the formation process of rainfall. The simulation model can predict regional precipitation for a long time in the future. However, the rich and specialized experimental data required by the method are difficult to obtain.
+	
+	\item \textbf{Plant community modeling methods}
+	
+	\qquad
+	Shugart,H.H.(1984)[4] used the dynamic vegetation model (DGVM), which perfectly described the dynamic impact of climate on vegetation. Moorcroft,P.R. et al.(2001)[5] introduced a new type of DGVM called ecosystem demography model. However, DGVMS are too complex, which is not conducive to our modeling solution. Tilman, D. (1994)[6] proposed a reproduction-competition trade-off model. It was based on the competition of plant individuals for habitat resources, and it described the ecological niches of various species in terms of competitive hierarchies. This model is an ecological niche model with reasonable assumptions, mathematical interpretability and good results. But it does not fully consider the limitation of environmental resource factors.
+	
+	\qquad
+	Recently, more and more researchers are using machine learning methods. Mendoza-Gonzalez,G. et al.(2019)[7] built a machine learning model to predict changes in grassland plant communities by analyzing environmental variables and species richness data. Zhang,J. et al.(2020)[8] adopted support vector machine, decision tree, random forest and other methods with relatively high prediction accuracy. Although ML models are effective, they need a large amount of reliable open-source data to support them.
+	
+	\qquad
+	Exploring the plant community drought adaptability requires quantifying regional drought intensity over time. We also need to study the effects of different drought intensity on population survival and interspecific interaction. These aspects are closely linked to regional rainfall modeling and plant community modeling. After considering the effectiveness, rationality of conditions, and ease of implementation of the above methods, we choose to carry out probabilistic modeling of regional rainfall, and introduce restrictions of water resources into the reproduction-competition trade-off model. We will provide a better method for studying the association between drought adaptation and biodiversity in plant communities.
+\end{itemize}
+
+\textbf{\subsection{Our Work}}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=15cm]{/1/our work.jpg}
+	\caption{Our main work flow} 
+	\label{our work}
+\end{figure}
+
+
+\textbf{\section{Preparation of the models}}
+
+\textbf{\subsection{Problem Analysis}}
+Modeling the response of plant populations with different diversity to random drought conditions, first requires simulations of different degrees of drought. So Our models need to be able to quantify drought with some indicator. The variation of the indicator should have irregular frequency and amplitude changes. Then, links need to be established between drought and some characteristics of the community. Finally, We should establish a community succession model around those characteristics. The succession model should fully consider the constraints of resources and the interaction between species. 
+
+
+To make the weather model and community model close to reality, we should select a specific region to study in order, which makes it easy to obtain local weather and species information. The area should be exemplary and can represent the situation prevailing in drought-stricken areas around the world. 
+
+\textbf{We selected grassland plant communities in semi-arid area for specific research.}Semi-arid regions, the zone between arid and humid regions, cover 41 percent of the world's land surface and support more than 38 percent of the world's population[15]. Meanwhile, in recent years, semi-arid regions are the most seriously affected area by drought. Grassland vegetation is the most widely distributed vegetation in semi-arid region[16]. Therefore, the region we choose is representative.
+
+So as to explore the long-term adaptability of populations to drought, our models should take longer time periods as time units and have long-term prediction capabilities.
+
+To quantify the change of plant community over time, we need to establish an evaluation index of community survival status. Based on this, the evaluation system of drought adaptability should be proposed.
+
+Since we’re required to explore the impact of our recommendations on the environment surrounding the community, our model should also consider the impact on the soil, the atmosphere and the overall ecological cycle.
+
+
+
+\textbf{\subsection{Global Assumptions and Justifications}}
+Global assumptions are as follows. Some other assumptions are closely related to the model,  so they are brought up during the modeling process.
+
+\begin{itemize}
+	\item \textbf{Assumption 1: There is only interspecies interaction between plants species. And for the interaction, we only consider competition.}\,In the grassland zone we study, herbivory is of low intensity[9]. So predation by herbivores is negligible. In grassland plant communities, the interspecies relation between plants is mainly competition. Parasitism and epiphytism are much rarer than competition. And symbiosis mostly involves fungi or animals[10].
+	
+	\item \textbf{Assumption 2: In the region we study, plant species compete only for water.}\,Water is the main limiting factor of grassland plant communities. Moreover, as rainfall variation and drought severity intensify, the limitation effect of water continues to strengthen[11].  Comparatively, other factors such as light and nitrogen are not the main factors limiting plant growth in most semi-arid areas[12].
+	
+	\item \textbf{Assumption 3: In the environment of the plant community we consider, water resources and each plant population are all evenly distributed within the community.}\,In a certain range, there is no obvious vertical and horizontal structure of grassland plant community. We therefore believe that: In each plant population, there is no macroscopic clustering behavior. The propagules produced by each species were also randomly dispersed throughout the habitat. In conclusion, all individuals compete for the same amount of water at the same moment.
+	
+	\item \textbf{Assumption 4: We define drought as "chronic lack of precipitation or significant lack of precipitation".}\,Drought can be defined from the perspective of meteorology, ecology and botany. To facilitate data collection and analysis, we choose the definition in meteorology: Chronic or significant lack of precipitation. Thus we use precipitation related indicators to measure the degree of drought.
+	
+	\item \textbf{Assumption 5: We ignore the occasion that excessive rainfall inhibits the growth of plant communities.}\,On the one hand, we analyze rainfall distribution in semi-arid region in subsection 3.1. The result indicates there is little chance of extremely heavy rain. On the other hand, the topic of this paper is to discuss the effects of local species diversity on drought adaptability of plant communities. So we ignore the case of excessive rainfall.
+	
+	\item \textbf{Assumption 6: There is no invasion of alien species.}\,There are too many possible outcomes from invasive species. Moreover, the situation is not common. So it is of little significance for studying the general relationship between drought adaptation and community biodiversity.
+	
+\end{itemize}
+
+%		\begin{table}[h]
+	%			\centering
+	%			\vspace{3pt}
+	%			\begin{tabular}{cp{5em}cp{5em}}
+		%				\toprule % 绘制第一条线
+		%				Symbol & Meaning \\ \midrule
+		%				$t$ & Time \\
+		%				$N$ & Total reported opioid cases\\
+		%				$N_t$ & Total reported drug cases\\
+		%				$\lambda$ & Average cases induced by a single case\\
+		%				$A_t$ & Status at $t$ \\ 
+		%				$E$ & Set containing socio-economic factors with high correlation $t$ \\
+		%				$T$ & Transition matrix\\ 
+		%				$i(t)$ & Proportion of opioid cases in all drug cases at $t$ \\
+		%				$\mu_1$ & Average number of drug cases induced by an existing drug case \\
+		%				$\mu_2$ & Number of opioid cases induced among all drug cases \\
+		%				$\gamma$ & Drug spread slow down factor \\
+		%				$i_0$ & Status at $t$ \\ 
+		%				$H$ & Information Entropy \\ 
+		%				$p_0$ & Initial number of drug cases\\
+		%				\bottomrule
+		%			\end{tabular}
+	%		\end{table}
+
+\textbf{\subsection{Notations}}
+
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{cc}
+			\hline
+			\makebox[0.3\textwidth][c]{Symbol}	&  \makebox[0.7\textwidth][c]{Meaning} 
+			\\ \hline
+			$p_i$ & Abundance of species $i$ in a community at a given time \\
+			$r_i$ & Natural reproduction rate of species i per unit time\\
+			$m_i$ & Natural mortality rate of species i per unit time\\
+			$cap_i$ & Competitive capability of species i\\
+			$V_p$ & Precipitation \\ 
+			$V_{p0}$ & Normal precipitation value \\
+			$\alpha$ & Shape parameter of gamma distribution \\ 
+			$\beta$ &  Scale parameter of gamma distribution \\
+			$loc$ &  Position parameter of gamma distribution \\
+			$k_r$ & Sensitivity of reproductive rate to rainfall \\
+			$k_m$ & Sensitivity of mortality rate to rainfall \\ 
+			$s$ & Number of species \\
+			$h$ & Proportion of species-suitable living areas \\ 
+			$E$ & Extinction rate of a species\\
+			$C_p$ & Change rate of total abundance of community\\
+			$H$ & Normalized Shannon-Weiner index\\
+			$C_H$ & Changes in Normalized Shannon-Weiner index\\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\section{Comprehensive Model of Community Succession Under Drought}
+\subsection{Probability Distribution Model of Rainfall in Semi-arid Grasslands}
+
+The weather in the semiarid zone is complex and variable, with little but not much precipitation. To simulate the irregularity of local rainfall as much as possible, we decide to construct the rainfall probability distribution model based on rainfall data of semiarid zone. 
+
+Hailar District, Hulunbuir City, Inner Mongolia Autonomous Region, China, is a typical temperate grassland semiarid zone. We obtained daily precipitation from January 1, 1952 to December 31, 2022 from the Internet [13]. We obtain annual precipitation data of Hailar District from 1952 to 2022 by summating the daily precipitation of the same year. And the histogram of frequency distribution is demonstrated in tht figure below.
+
+\begin{figure}[h]\label{histo1}
+	\centering
+	\subfigure{\includegraphics[width=7cm]{/3.13.2/1.jpg}}
+	\subfigure{\includegraphics[width=7cm]{/3.13.2/2.jpg}}
+	\caption{Histogram of precipitation frequency distribution in Hailar District} 
+\end{figure}
+
+The left panel of Fig.2 shows that the annual precipitation is likely to fall between 10 and 15mm. The probability of falling below 6mm or above 18mm is small, but the extreme situation may be  close to 0mm or  50mm. According to the characteristics of annual precipitation distribution in this region, we fit a gamma distribution. The shape parameter of the distribution  $\alpha=12.018$, the position parameter $loc=-7.456$, and the scale parameter $\beta=1.803$. The curve of the probability density function is shown in the right panel of Fig.2.
+
+Therefore, we can obtain annual precipitation data of the region by sampling the distribution.
+
+\subsection{The Vitality-Rainfall Model}
+
+Based on global assumption 5, we do not consider the inhibition of excessive precipitation on plant communities. Under the present conditions,we believe that the reproductive rate of a plant population is positively correlated with precipitation $V_p$, while the mortality rate is negatively correlated with $V_p$, as shown in Fig. \ref{cartoon}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=8cm]{/3.13.2/3.jpg}
+	\caption{Effect of rainfall on plant vitality} 
+	\label{cartoon}
+\end{figure}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=8cm]{/3.13.2/4.jpg}
+	\caption{Evaluation of rainfall thresholds,	where $V_{p1}$=6.754 and $V_{p2}$=22.480} 
+	\label{density}
+\end{figure}
+
+Considering the different ecological characteristics of plant functional groups in grassland ecosystem, Kang L et al. divided grassland vegetation into perennial plants and therophyte[14] according to life history.
+
+Perennial plants are common life histories in grassland vegetation, including some grasses and shrubs. They have long life cycles and complex root systems. Comparatively, therophyte usually thrives during the right season but dies quickly when conditions are harsh. They play an important role in material circulation and energy transfer in grassland ecosystem.
+
+Since the time unit of our model is one year, we believe that the mortality rate of therophyte is 1, while that of perennial plants is within $[0,1]$. And we set the reproductive rate of all plant species within the interval $[0,+∞]$.
+
+When precipitation is moderate, perennial  reproductive rate, perennial mortality rate and therophyte reproductive rate do not change significantly with precipitation. So we set all those parameters to constants. However, when the precipitation is very little or very much, the change of the parameters with the precipitation is more obvious. We suppose the relationship to be linear.
+
+Therefore, we believe that the reproductive rate $r_i$ of perennial or therophyte species $i$ has the following relationship with precipitation $V_p$:
+
+\begin{equation}
+	\label{eq1}
+	r_i=\left\{
+	\begin{aligned}
+		k_{r}(V_p& -V_{p1})+r_0, & V_p<V_{p1} \\
+		&r_0,&V_{p1}<V_p<V_{p2} \\
+		k_{r}(V_p& -V_{p2})+r_0, & V_p>V_{p2} 
+	\end{aligned}
+	\right.
+\end{equation}
+where $k_r$ and $r_0 $are positive constants that vary with species, while $V_{p1}$ and $V_{p2}$ are species-independent constants.
+
+Similarly, we believe that the mortality rate $m_i$ of perennial species $i$ has the following quantitative relationship with precipitation $V_p$:
+
+\begin{equation}
+	\label{eq2}
+	m_i=\left\{
+	\begin{aligned}
+		-k_{m}(V_p& -V_{p1})+m_0, & V_p<V_{p1} \\
+		&m_0,&V_{p1}<V_p<V_{p2} \\
+		-k_{m}(V_p& -V_{p2})+m_0, & V_p>V_{p2} 
+	\end{aligned}
+	\right.
+\end{equation}
+where constant $k_m$ and $m_0$ are positive and species-related, while $V_{p1}$ and $V_{p2}$ are species -independent .
+
+We believe that the values of $V_{p1}$ and $V_{p2}$ in the two formulas are the same. $V_{p1}$ is equal to the 10\% quantile of the gamma distribution in Fig.2.$V_{p2}$ is equal to the 90\% quantile. $V_{p1}$ and $V_{p2}$ are shown in Fig.\ref{density}.
+
+
+\subsection{Community Succession Model Based on Reproduction-competition Trade-off}
+In 3.2, we obtain the relationship between population quantity characteristics and rainfall conditions. To describe the community succession with population characteristics, and introduce the competition between species, we establish a reproduction-competition trade-off model. We first model the change rule of a single population. In the simplest case, we also reveal some important mathematical conclusions.Then the model was extended to an infinite number of species. Finally, we put together a comprehensive model of community succession.
+
+\subsubsection{Model Assumption}
+
+\begin{itemize}
+	\item \textbf{Assumption 1: All individuals live in a spatially structured, subdivided habitat. }\,Each individual in a community exists at a specific point in space. Rather than regarding the community as completely continuous and mixed up, our model treats the space occupied by each individual as a "point" according to the basic principles of niche modeling. The scale of a point is generally less than 3m.
+	
+	\item \textbf{Assumption 2: At the early stage of succession, the natural reproductive rate and mortality rate of  grassland plant communities remain constant. }\,Before the succession enter the competitive equilibrium stage, we consider water resources to be sufficient, and the limiting effect of water resources on plant population are ignored.
+	
+\end{itemize}
+
+\subsubsection{The Reproduction and Mortality Trade-off for Individual Species}
+\textbf{Model Principle}\quad According to global assumption 3, species and resources are evenly distributed. Therefore, when we measure the survival state of a species at a certain moment, we do not consider the spatial characteristics of species, but the quantitative characteristics. According to model assumption 1, the territory of the community is subdivided into points, and the adults of each species can completely occupy a point. The competition rules are demonstrated in Fig. \ref{competetion} 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=8cm]{/3.3/1.jpg}
+	\caption{The structure of Reproduction-Competition Trade-off Model} 
+	\label{competetion}
+\end{figure}
+
+So let $p$ be the fraction of points occupied by a species. We call $p_i$ the abundance of species $i$. Abundance $p_i$ can be defined by the following equation:
+
+\begin{equation}
+	\label{eq3}
+	p_i = \frac{the \,number \,of \,points\, that \,species \,i\, occupied \,at\, a\, given\, time}{the \,total \,number \,of\, points\, in\, the\, community}
+\end{equation}
+We used abundance $p_i$, natural reproduction rate $r_i$ and natural mortality rate $m_i$ to characterize the survival state of species $i$.
+
+Let us now consider the simplest case, the primary succession of a monospecies community. At some moment, species $i$ is the only species in the community. We calculate the change rate of $p_i$ as follows:
+
+\begin{equation}
+	\label{eq4}
+	\frac{dp_i}{dt}=r_ip_i(1-p_i)-m_ip_i
+\end{equation}
+
+In equation (\ref{eq4}), we call $r_ip_i(1-p_i)$ the reproduction term, which represents the process of species $i$ colonizing glades. It means that the growth rate of $p_i$ caused by reproduction is proportional to these factors: the reproduction rate, the abundance and the proportion of remaining invasible points $(1-p)$ at the moment. We call $m_ip_i$ the mortality term, which describes the process by which species $i$ dies and quits its occupied point. Mathematically, the mortality term represents the rate at which death reduces abundance. It’s proportional to the mortality rate and abundance values.
+
+Some other features of the equation also support its plausibility. We assume the monospecies community to start its succession from zero, and we ignore the limiting effect of water at the beginning of succession according to model hypothesis 2. So, let $p_i$ be 0 at time 0. Let $r_i$ and $m_i$ be fixed at different values. The abundance - time graph of species i is as follows:
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=8cm]{/3.3/2.jpg}
+	\caption{Succession of four species in a mutually independent community } 
+	\label{balance}
+\end{figure}
+As Fig. \ref{balance} shows, when $r_i$ and $m_i$ remain unchanged, the abundance of species $i$ eventually reaches a stable value. Taking $\frac{dp_i}{dt}=0$ in equation \ref{eq4}, we solve the stable value of $p_i$  as follows:
+
+\begin{equation}
+	\label{eq5}
+	\hat{p_i}=1-\frac{m_i}{r_i}
+\end{equation}
+
+This equilibrium has the following important implications:
+
+\begin{itemize}
+	\item When water resources are sufficient at the early stage of succession, the species was not obviously limited by water. Instead, the reproduction rate and mortality rate are mainly determined by biological features of the species itself. So $r_i$ and $m_i$ remained constant. After the succession began, the abundance gradually increased, and when the abundance value reached $\hat{p_i}$, reproduction and mortality reached a balance. 
+	
+	It was not until after equilibrium that water resources begin to play a significant limiting role, which means $r_i$ and $m_i$ values begin to change with rainfall. This situation will be discussed in 3.5.
+	
+	
+	
+	\item If $m_i >r_i$, then $\hat{p_i}<0$ . In other words, even if the resource is rather abundant, species $i$ cannot survive. Therefore, the species can’t contribute to assessing the drought adaptability of the community. So when we solve the model later, we set natural mortality rate less than the natural reproduction rate for all species.
+	
+\end{itemize}
+
+\subsubsection{The Reproduction - competition Trade-off for Multiple Species}
+
+\textbf{Model Principle}\quad Based on global assumption 1, we only consider the competition between plant populations. When two species are present at the same point, the superior competitor always replaces the inferior competitor, but the inferior competitor can neither invade nor displace the superior competitor from a single point. 
+
+First, we consider a community composed of two species. According to the above theory, if we assume that species $i$ is the superior competitor and species $j$ is the inferior competitor. We list the following equation set:
+
+\begin{equation}
+	\label{eq6}
+	\left\{
+	\begin{aligned}
+		\frac{dp_i}{dt} = & r_ip_i(1-p_i) -m_ip_i\\
+		\frac{dp_j}{dt} = & r_jp_j(1-p_i-p_j) - m_jp_j-r_ip_ip_j
+	\end{aligned}
+	\right.
+\end{equation}
+
+where,$p_i$,$p_j$, $r_i$,$r_j$,$m_i$,$m_j$ respectively represent the abundance, reproductive rate and mortality of species $i$ and $j$ at a certain moment.
+
+Competition is mainly in the equation for species j. Compared to the case of individual species, in the reproduction term of species j, the factor  changed from $(1-p_j)$ to $(1-p_i-p_j)$. Moreover, a term $-r_ip_ipj$ is added. 
+
+These changes indicate that, not only the colonization space of the inferior species is squeezed, but also its living space may be directly invaded by the superior species. Compared to species j, the formula for species i is exactly the same as equation (\ref{eq4}), which means the superior species is completely unaffected by the superior species.
+
+Next, we extend equation $x$ and $x$ to the competition of an infinite number of species. We rank the competitiveness of species from worst to best:
+
+
+
+\begin{equation}
+	\label{eq7}
+cap_1<cap_2<...<cap_i...<cap_{n-1}<cap_n
+\end{equation}
+
+Then the equation of abundance change rate for the species $i$ is:
+
+\begin{equation}
+	\label{eq8}
+	\frac{dp_i}{dt}=r_ip_i(1-\sum_{j=1}^{i}{p_j})-m_ip_i-
+	(\sum_{j=1}^{i-1}{r_jp_jp_i})
+\end{equation}
+
+The factors that affect the dynamics of each population can be divided into internal factors and external factors. For internal factors, we consider reproduction and death For external factors, we only consider superior species occupying inferior ones.
+
+\subsection{Drought Adaptation Indicators}
+
+To quantitatively represent the changes of plant communities under irregular drought cycles, we propose three indicators to characterize the community's drought adaptation:
+
+\begin{itemize}
+	\item \textbf{Species extinction rate}\,
+	\begin{equation}
+		E = \frac{s_0-s_1}{s_0}
+	\end{equation}
+	where $s_1$ is the number of species present in the community after experiencing drought weather and $s_0$ is the number of species present in the community when it is stable.
+	
+	\item \textbf{Total abundance change rate}\,
+	\begin{equation}
+		C_p = \frac{\sum_{i=1}^{s}{p_i^*}-\sum_{i=1}^{s}{p_i}}{\sum_{i=1}^{s}{p_i}} 
+	\end{equation}
+	where $\sum_{i=1}^{s}{p_i^*}$ is the total abundance of the community after experiencing drought weather and $\sum_{i=1}^{s}{p_i}$ is the total abundance of the community when it is stable.
+	
+	\item \textbf{Changes in Normalized Shannon-Weiner index}\,
+	Normalized Shannon-Weiner index (H) is commonly used in ecology to describe species diversity[17].A higher Normalized Shannon-Weiner index indicates greater ecological diversity and richness within the community.
+	\begin{equation}
+		H=\frac{-\sum{p_i\times ln(p_i)}}{ln(s)}
+	\end{equation}
+	where $p_i$ is the abundance of each species and $s$ is the number of species.
+	
+	\begin{equation}
+		C_H = H^*-H
+	\end{equation}
+	where $H^*$ and $H$ represent the normalized Shannon-Weiner index of the community under drought conditions and at equilibrium, respectively.
+	
+\end{itemize}
+
+\subsection{Model Summary}
+
+According to the conclusion in section 3.3.3, rainfall and weather cycles do not play a limiting role for the community, until the species within the community reach equilibrium. Therefore, we divided the succession process of plant community under drought condition into two stages:
+
+\begin{itemize}
+	\item \textbf{Stage 1: Initial succession to community stability.}\,In the early stage of succession, when water resources are sufficient, reproduction rate and mortality rate do not change with rainfall. That is, $r_i$ and $m_i$ were fixed, and only the reproduction-competition trade-off model in section 3.3 was involved in this stage.
+	
+	\item \textbf{Stage 2: Drought impact stage.}\,It is assumed that the water resources during this stage are scarce and the reproduction rate and death rate of species will vary with rainfall. The relations of these factors are described by the model in section 3.2. Therefore, it is necessary to combine the two models in 3.2 and 3.3 in this stage:
+	
+\begin{equation}
+	\label{eq9}
+	\frac{dp_i}{dt}=r_ip_i(1-\sum_{j=1}^{i}{p_j})-m_ip_i-
+	(\sum_{j=1}^{i-1}{r_jp_jp_i})
+\end{equation}
+
+\begin{equation}
+	\label{eq10}
+	r_i=\left\{
+	\begin{aligned}
+		k_{r}(V_p& -V_{p1})+r_0, & V_p<V_{p1} \\
+		&r_0,&V_{p1}<V_p<V_{p2} \\
+		k_{r}(V_p& -V_{p2})+r_0, & V_p>V_{p2} 
+	\end{aligned}
+	\right.
+\end{equation}
+
+\begin{equation}
+	\label{eq11}
+	m_i=\left\{
+	\begin{aligned}
+		-k_{m}(V_p& -V_{p1})+m_0, & V_p<V_{p1} \\
+		&m_0,&V_{p1}<V_p<V_{p2} \\
+		-k_{m}(V_p& -V_{p2})+m_0, & V_p>V_{p2} 
+	\end{aligned}
+	\right.
+\end{equation}
+	
+\end{itemize}
+
+
+
+\section{Model Simulation Results and Conclusions}
+
+\subsection{The simulation Algorithm}
+The simulation of the above model is essentially a process of solving differential equations. We use the fourth-order Runge-Kutta method for solving to obtain a more accurate and stable solution. To simulate various irregular weather cycles, we sample the rainfall gamma distribution curve we obtained in 3.1. The detailed algorithm is as follows: 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=8cm]{/4.1/1.jpg}
+	\caption{Topographic map of the  2021 Olympic Time Trial course} 
+	\label{algo}
+\end{figure}
+
+\begin{itemize}
+	\item \textbf{Step0:}\,Set the initial conditions of the differential equation. Namely, the reproduction rate $r_i$, mortality rate $m_i$, competitiveness $cap_i$, the initial abundance $p_i^0$ of each species, and the number of species $s$. Then we use the Fourth-order Runge-Kutta method to simulate $p_i$ changing with time $t$ until the equilibrium was reached between the species. 
+	
+	\item \textbf{Step1:}\,Input the parameters of the gamma distribution curve to obtain the probability density curve of annual rainfall, and then get the average annual rainfall in the T-year through sampling. 
+
+	\item \textbf{Step2:}\,Based on each abundance value under the equilibrium state established in Step 0, the species' reproductive and mortality rates start to change with rainfall. The fourth-order Runge-Kutta method continues to be used to simulate the variation of each abundance over time $t$ under various irregular weather cycles.
+\end{itemize}
+
+\subsection{Impact of Species Numbers}
+To explore the mechanism of how several species affects the plant community, in this section, we set each reproduction rate to 0.8. And for each species, we change the mortality rate according to its competitiveness. Then we simulated the succession process of different communities, with the number of species from 2 to 18.
+
+The competitiveness level from high to low is $1,2...... s$. So $1$ represents the most competitive species and $s$ the least competitive. (In the following discussion, we keep using the same way of sorting).Part of the results are shown in Fig.8
+
+\begin{figure}[h]
+	\centering
+	\subfigure[$s=2$]{\includegraphics[width=5cm]{/4.2/2.jpg}}
+	\subfigure[$s=6$]{\includegraphics[width=5cm]{/4.2/6.jpg}}
+		\subfigure[$s=16$]{\includegraphics[width=5cm]{/4.2/16.jpg}}
+	\caption{Dynamics of competition among multiple species} 
+\end{figure}
+\noindent where species 1 is the best competitor, and all species have identical reproduction rate ($r=0.8$), but different mortality rate($m_i=0.7-0.5\times {\frac{1}{S}}\times i$,$s$ is the number of species). All species had initial abundances of 0.01 and the gamma distribution is sampled with the same parameters.
+
+We applied the algorithm in 4.1 to solve the model. The drought adaptability indicators of each community are listed in the following chart:
+
+\begin{table}[h]\label{table1}
+	\begin{center}
+		\begin{tabular}{cccccccc}
+			\hline
+			\makebox[0.3\textwidth][c]{Species Num}	& 
+			\makebox[0.07\textwidth][c]{2}	& 
+			\makebox[0.07\textwidth][c]{4}	& 
+			\makebox[0.07\textwidth][c]{6}	& 
+			\makebox[0.07\textwidth][c]{8}	& 
+			\makebox[0.07\textwidth][c]{10}	& 
+			\makebox[0.07\textwidth][c]{12}	& 
+			\makebox[0.07\textwidth][c]{14}	
+			\\ \hline
+			Extinction rate &0.000&0.000&0.000&0.131&0.102&0.082&0.141 \\
+			\hline
+			Rate of change of \\total abundance & -0.022&0.071&0.104&0.032&0.013&0.035&-0.029 \\
+			\hline
+			Changes in \\Shannon-Weiner index & -0.836&-0.608&-0.542&-0.503&-0.486&-0.462&-0.451 \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\textbf{Conclusion:}
+
+\begin{itemize}
+	\item In various irregular weather cycles, the abundance of each species presents a fluctuation change. The fluctuation change makes species with less abundance more prone to extinction.
+	
+	\item It can be found that Changes in Normalized Shannon - Weiner index increased gradually, indicating the increased community drought adaptability. The total abundance of the community (the sum of the abundance of all species) increased first and then decreased. When s=6, the index reaches its maximum. Therefore, we believe that at least 6 species are needed for a community to benefit from localized biodiversity. As shown in Fig.8, when the number of species increases, the abundance of superior competitors almost stays around 0.12, while the abundance of other inferior competitors will gradually decrease or even become extinct.
+	
+
+	
+\end{itemize}
+
+	In conclusion, increasing number of species can improve the richness and drought adaptability of community to some extent. This conclusion also explains that herdsmen use perennial grasses, herbages, shrubs, and other plants for planting and replanting, to enhance the drought resistance of grassland.
+	
+\subsection{Impact of Species Type}
+Based on the above analysis, we set the number of species to 6 in this section, and only changed the composition types of species in the following way:
+
+\begin{itemize}
+	\item All therophyte
+	
+	\item All perennial plants
+	
+	\item Mixed therophyte and perennial plants
+	
+\end{itemize}
+
+\begin{figure}[h]\label{4.31}
+	\centering
+	\subfigure[All therophyte：$m_i=1$ for $i=1,…,6$,$r_i= m_i=2+25\times {\frac{1}{s}\times i}$,$s$ is the number of species.Normalized Shannon-Weiner index is 0.659]{\includegraphics[width=5cm]{/4.3/single.jpg}}
+	\subfigure[All therophyte：$r_i=0.5$ for $i=1,…,6$,the value of $m_i$ decreases with competitiveness respectively as 0.4,0.3,0.2,0.15,0.1,0.05. Normalized Shannon-Weiner index is 0.561]{\includegraphics[width=5cm]{/4.3/multi.jpg}}
+		\subfigure[Mixed therophyte and perennial plants：Perennials are more competitive than therophyte,so the values of $m_i$ are 0.2,0.2,0.2,1,1,1 and the values of $r_i$ are 0.333,0.666,0.9,1.5,3,10. Normalized Shannon-Weiner index is 0.850]{\includegraphics[width=5cm]{/4.3/mix.jpg}}
+	\caption{Dynamics of competition among multiple species} 
+\end{figure}
+
+\textbf{Conclusion:}
+
+\begin{itemize}
+	\item Based on Fig.9, even if a species is the least competitive, as long as it has a high reproduction rate, it can also occupy much living space in a biological community, which is similar to the "weeds" in a community.
+	
+	\item Normalized Shannon-Weiner index shows that mixed perennial and annual communities have the best drought adaptability,  while all-perennial communities are the weakest. This also explains why plants such as trees and shrubs are hard to find in semi-arid regions.
+	
+\end{itemize}
+
+\subsection{Impact of the Frequency and Severity of Droughts}
+
+We explored the effects of drought frequency and severity by adjusting the distribution of annual precipitation.
+
+In 3.1, the annual precipitation distribution we fit is the gamma distribution. Its mean $\mu=\alpha\beta$ and variance $\sigma^2=\alpha\beta^2$. When we reduce the value of $\beta$, the mean $\mu$ and variance $\sigma$ will both be smaller. As a result, the distribution will be more concentrated and its mean will decrease. Then, the probability of sampling a smaller value will increase. That is to say, the frequency and severity of drought will also increase. On the contrary, when we increase beta, the situation is completely reversed.
+
+Therefore, we can control the frequency and severity of drought by changing the scale parameters of the gamma distribution. In this section,$\alpha=12.022$, $loc=-7.46$. We set $\beta$=1.10, 1.4, and 1.7 respectively for simulation. The results we get are shown in Fig.10.
+
+\begin{figure}[h]
+	\centering
+	\subfigure[$\beta=1.1$]{\includegraphics[width=5cm]{/4.4/1.1.jpg}}
+	\subfigure[$\beta=1.4$]{\includegraphics[width=5cm]{/4.4/1.4.jpg}}
+		\subfigure[$\beta=1.7$]{\includegraphics[width=5cm]{/4.4/1.7.jpg}}
+	\caption{Dynamics of competition among multiple species} 
+\end{figure}
+
+\textbf{Conclusion:}
+\begin{itemize}
+	\item When the frequency and severity of drought increase, the abundance of superior species in the original competition gradually decrease. Superior species gradually lose their competitiveness.
+	
+	\item A certain degree of drought can moderately reduce the competitiveness of dominant species, thereby increasing the competitiveness of relatively inferior species. This results in a more average abundance distribution over species. To a certain extent, biodiversity increases. The above analysis suggests that increasing species richness is one of the ways plant communities can resist drought.
+	
+	\item Very severe droughts can reduce the competitiveness and abundance of most species. 	Only a few species keep their abundance. This shows that the drought is beyond the range 	plant communities can adapt to, which is the reason why extremely dry areas have so few species.
+
+
+	
+\end{itemize}
+
+	In addition, we take $\beta=2.0$ to reduce the drought frequency. Other parameters are the same as those in 4.2. The indicators of each community about drought adaptability are  in the following table:
+	
+	By comparing the table in 4.2, it can be found that if droughts are less frequent, the increase in species number will significantly improve the richness and diversity of species, and further enhance the drought resistance ability of the community.
+
+	\begin{table}[h]\label{table2}
+	\begin{tabular}{cccccccc}
+		\hline
+		\textbf{The number of species}                                                       & \textbf{2} & \textbf{4} & \textbf{6} & \textbf{8} & \textbf{10} & \textbf{12} & \textbf{14} \\ \hline
+		Species extinction rate                                                              & 0.000      & 0.000      & 0.000      & 0.125      & 0.100       & 0.167       & 0.143       \\ \hline
+		Total abundance change rate                                                          & -0.020     & -0.083     & -0.065     & -0.030     & 0.009       & 0.013       & 0.000       \\ \hline
+		\begin{tabular}[c]{@{}c@{}}Changes in Normalized\\ Shannon-Weiner index\end{tabular} & -0.005     & -0.050     & -0.040     & 0.005      & 0.019       & 0.034       & 0.019       \\ \hline
+	\end{tabular}
+\end{table}
+
+\subsection{Impact of Pollution and Habitat Reduction}
+
+\subsubsection{Model Correction}
+\qquad
+In section 3.3, we believed that all points in the community were suitable for survival To explore the impact of habitat destruction on the community, we set the proportion of points suitable for plant survival in the community as h(h is between 0 and 1). When h=1, the habitat was considered to have no damage. The smaller the h, the more severe the habitat damage.
+
+The corrected reproduction-competition trade-off model is:
+
+\begin{equation}
+	\label{eq12}
+	\frac{dp_i}{dt}=r_ip_i(h-\sum_{j=1}^{i}{p_j})-m_ip_i-
+(\sum_{j=1}^{i-1}{r_jp_jp_i})
+\end{equation}
+
+\subsubsection{Analysis of Results}
+\qquad
+We take $h=1$, $h=0.8$ and $h=0.6$ respectively.Fig. 11 demonstrates our results.
+
+\begin{figure}[h]\label{4.5}
+	\centering
+	\subfigure[$h=0.6$]{\includegraphics[width=5cm]{/4.5/1.jpg}}
+	\subfigure[$h=0.8$]{\includegraphics[width=5cm]{/4.5/2.jpg}}
+	\subfigure[$h=1.0$]{\includegraphics[width=5cm]{/4.5/3.jpg}}
+	\caption{Dynamics of competition among multiple species} 
+\end{figure}
+
+\textbf{Conclusion:}
+
+Habitat destruction or pollution will reduce the amount of living space, which is occupied by superior competitive species, or even lead the species to extinction. But  space for the inferior species will increase(even if the total amount of living space decreases). This conclusion can be applied to agricultural production: In farmland ecosystems, if soil gets polluted, it may cause weeds (less competitive species) to occupy more space, or even replace crops (more competitive species).
+
+\subsection{Measures to Improve Long-term Viability and Other Influences}
+
+We believe that the following measures can be taken to ensure the long-term viability of a plant community:
+
+\begin{itemize}
+	\item \textbf{Plant multiple drought-resistant plant species and pay attention to reasonable combinations.} Based on the conclusions of Section 4.2 and Section 4.3, annual and perennial plants can be mixed. For example, in grassland areas, herders can use perennial grasses, forages, and shrubs for planting and replenishment to enhance the grassland's drought resistance.
+	
+	\item \textbf{Reasonable use of water resources.} Based on the conclusions of Section 4.3, the lack of rain or irregular rainfall is the main cause of drought. Reasonable use of water resources, such as rainwater collection and irrigation, can ensure that plants can obtain sufficient water in the absence of rainfall.
+	
+	\item \textbf{Protect habitats.} Based on the conclusions of Section 4.5, avoiding excessive development, reducing human interference, and avoiding a reduction in the living space occupied by superior competitive species.
+\end{itemize}
+
+At the same time, the above measures also have many positive impacts on the larger environment, as follows:
+
+\begin{itemize}
+	\item Our measures improve the hydrological cycle. Plant transpiration can release water into the atmosphere, while plant roots can increase soil permeability and water retention, thus reducing the frequency and severity of droughts.
+	
+	\item Our measures improve soil quality and stability. Plant roots can grip the soil and maintain its stability, reducing soil erosion. Meanwhile, the different growth patterns and life history characteristics of different plants can also improve soil fertility.
+\end{itemize}
+
+\section{Sensitivity Analysis}
+
+There are several variable parameters in the model, such as: reproduction rate $r$, mortality rate $m$, parameters of gamma distribution $\alpha, \beta, loc$, proportion of species-suitable living  areas $h$. In Section 4, we have analyzed the influence of the above parameters on the stability of the model. Therefore, sensitivity analysis mainly focuses on the sensitivity of reproductive rate of species to rainfall $k_r$, the sensitivity of mortality rate of species to rainfall $k_m$ and the threshold of rainfall $V_{p1},V_{p2}$. It is assumed that plant reproductive rate and mortality are equally sensitive to rainfall,  so $k_r$ and $k_m$ are identically expressed by $k$.
+
+We used Python to plot the curve pf abundances of species, with sensitivity $k$ ranging from 0.02 to 0.03.
+
+\begin{figure}[h]\label{5.1}
+	\centering
+	\includegraphics[width=8cm]{/5/1.png}
+	\caption{k within the range of 0.2 to 0.3} 
+\end{figure}
+
+As shown in Fig.12, when $k$ is within the range of (0.020,0.029), each abundance curve shows a similar fluctuation trend.Therefore, the model is stable for $k$, and small deviation of $k$ will not bring great error to model results.
+
+Fig.13 depicts the variation curve of species abundance within the deviation range of ±3\% of rainfall threshold.
+
+\begin{figure}[h]\label{5.2}
+	\centering
+	\includegraphics[width=8cm]{/5/2.jpg}
+	\caption{Rainfall threshold within ±3\% error} 
+\end{figure}
+
+In the figure, species abundance changes have large fluctuations, especially when the rainfall threshold is within the range of -1\% ~ -3\%. Therefore, the model is sensitive to  rainfall threshold. It is reasonable to select thresholds based on quantiles of historical rainfall data distribution.
+
+\section{Strengths and Weaknesses}
+
+\subsection{Strengths}
+
+\begin{itemize}
+	\item \textbf{Based on mature theory.}\,
+	
+	Our model is based on mature theories. For example, the colonization-competition trade-off model belongs to niche models. This kind of model has been developed for decades and has a solid theoretical foundation and wide application.
+	
+	\item \textbf{Close to reality.}\,
+	
+	First of all, when simulating drought conditions, the model does not simply reduce precipitation but changes the parameters of the precipitation probability distribution, which can better reflect the randomness of local precipitation in the real world. 
+	
+	Second, there are enough parameters in the model to fully consider and describe various factors in real community succession. In the process of solving the model, we also carefully select the values of these parameters and strive to make the model as close to the actual situation as possible.
+	
+	\item \textbf{Universality. }\,
+	
+	Our model uses a general probability distribution model to simulate precipitation. It also adopts a niche model that is applicable to most grassland ecosystems and is not limited to factors, such as specific plant species. As long as the detailed conditions are slightly modified, it can be applied to all kinds of grassland areas.
+	
+	\item \textbf{High Application Value.}\,
+	
+	Semi-arid grassland region accounts for a high proportion of land area around the world. With a large population, the area is very sensitive to arid climate, and s the world’s main drought disaster area. Our model has a certain significance for solving the problems of grassland degradation, soil erosion and so on.
+\end{itemize}
+
+\subsection{Weaknesses}
+
+\begin{itemize}
+	\item The model does not take into account the effects of animal and microbial populations on plants. Animals feed on and pollinate plants, and some microbes live in symbiosis with plants and change soil composition. These factors are not a major constraint on plant communities in the case we studied, but may play a dominant role in other grassland areas.
+	
+	\item The comprehensiveness of the solution needs to be improved. Different species have different reproductive and mortality rates, as well as different sensitivity to rainfall. There are numerous combinations of these parameters, but a part of them is not considered in Section 4.
+	
+\end{itemize}
+
+\subsection{Conclusion}
+
+This paper analyzes in detail the relationship between drought adaptability and the number of species in a plant community. Before introducing our model, we analyze the characteristics and distribution of historical rainfall data and propose the Vitality-Rainfall Model, the Reproduction-Competition Trade-off Model, and quantitative indicators for characterizing the drought adaptation of communities.
+
+To explore the process of species succession in the community, we use the Fourth-order Runge-Kutta method to solve the differential equations and obtain the change curve of species abundance over time. By changing the number and type of species, frequency and severity of droughts, and habitat area destruction, we have a clearer understanding of the long-term survival of plants in arid areas .And we have also obtained some interesting conclusions. For instance, increasing the number of species can improve the richness and drought adaptability of the community to some extent, but it can also lead to an increase in the extinction rate of species. What's more, communities with mixed distributions of perennial and annual plants have better drought resistance.
+
+Finally, based on the above conclusions, we provide suggestions on how to improve the long-term viability of a plant community, and perform sensitivity analyses on plant reproductive and mortality rates, as well as rainfall threshold values. The analysis demonstrates the robustness of our model and the rationality of its parameters.
+
+
+\section{Model Extension and Furthur Discussion}
+
+\subsection{Model Extension}
+Our model has great extension value and universality. It’s a comprehensive model of community succession under the influence of irregular drought. Our model applies to semi-arid regions around the world. The model can be used to simulate the succession of plant communities in another area just by modifying the rainfall probability distribution sub-model, namely fitting precipitation data or other climatic data in that specific area.
+
+Meanwhile, the competition and reproduction of other organisms, such as animals and microorganisms can also be considered in the model, to establish the succession model of the whole biological community under the change of environmental factors.
+
+\subsection{Furthur Discussion}
+
+We believe that our model could be improved in the following ways: 
+
+In 3.2, we argued that the reproduction rate $r$ of all plants and the mortality rate $m$ of perennial plants were almost constant when the precipitation was moderate. And they had a linear relationship with precipitation when the precipitation was relatively more or less. In practice, however, $r$ and $m$ of the same species vary with precipitation at different rates under drier or wetter conditions. Therefore，when $V_p<V_{p1}$ and $V_p>V_{p2}$ , we can set $k_r$and  $k_m$ to be different, as a refinement of the model.
+
+Additionally, the relationship between $r$, $m$ and rainfall is not smooth, which is inconsistent with the facts. The relationship can be constructed as a smooth functional relationship to improve the model.
+
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=10cm]{/Users/ivk1442/Pictures/R1/capi.png}
+%	\caption{Calculation of the capillary force on the single particle} 
+%\end{figure}where $T_s$ is the liquid level tension of capillary water at $S_{Ai} $, and its direction is tangent to the liquid level; $\beta_i$ is the tutor between girt particle A and girt particle B;$\alpha_i$ is the tutor between $T_s$ and particle A;L is the length of the contact area between particle A and capillary water, and $f_s$ is the resultant force of capillary water on particle A, whose direction is perpendicular to the contact surface.
+%	
+%	According to literature[1], resultant $f_s$ can be calculated as follows:
+%
+%\begin{equation}
+%	u_a-u_w=\frac{T_s}{r}cos\alpha.
+%\end{equation}
+%
+%\begin{equation}
+%	f_{si}=(u_a-u_w)L_i.
+%\end{equation}
+%where $u_a$ is the pore gas pressure; $u_w$ is the pore water pressure; $r$ is the liquid surface radius of capillary water bend;and $\alpha$ is the contact angle.
+%
+%\subsubsection{Force Model of Sand Erosion by Waves}
+%\qquad
+%We conducted a force analysis on the interaction between the sand and gravel in direct contact. To simplify the modeling process, we only considered the action of the sand and gravel in the upper and lower directions. The force diagram is shown below:
+%
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=10cm]{/Users/ivk1442/Pictures/R1/sandinteraction.png}
+%	\caption{Force analysis diagram of sand grain interaction} 
+%\end{figure}
+%
+%	In Figure 4, the gravel in the middle is the analysis object, where $G_{mg}$ is the gravity, $N_1$, $N_2$, $f_a1$ and $f_a2$ are the pressure and static friction force of the lower and upper gravel respectively, $f_{a1}<=f_{A1}$, $f_{a2}<=f_{A2}$, $f_{A1}$ and $f_{A2}$ are the maximum static friction force
+%	
+%As the sand grain is hindered by gravity and other gravel in the vertical direction, while it may fall off from the sand pile due to the impact of sea waves in the horizontal direction. Compared with the vertical direction, it is easier to move in the horizontal direction. Therefore, the horizontal force is mainly analyzed.
+%
+%The resultant force in the horizontal direction is expressed as:
+%
+%\begin{equation}
+%	\vec{F_{gx}}=\vec{N_{1x}}+\vec{N_{2x}}+\vec{f_{a1x}}+\vec{f_{a2x}}.
+%\end{equation}
+%
+%\subsection{Establishment of Sandpile Model Using Cellular Automata}
+%Cellular automata is a kind of grid dynamics model with discrete time, space and state, local spatial interaction and temporal causality, which has the ability to simulate the spatio-temporal evolution of complex systems. Considering the complexity of sand force and the diversity of motion state, we choose to use cellular automata to simulate the process of sand pile change. We discretized the sand pile and sea wave into cells, and the process of sand pile change into time periods. By using the force analysis in 4.1, we established the rules of cellular state transition, and finally established the cellular automata simulation model of sand pile.
+%
+%\subsubsection{Definitions of Cellular Automata Elements}
+%\qquad
+%Standard cellular automata is A four-tuple composed of "cellular, cellular state set, neighborhood and state update rules", which can be represented as $A=(L,d,S,N,f)$[2], where A represents a cellular automata system, L represents cellular space, and d represents the dimension of cellular space within cellular automata, which is a positive integer. S is a set of discrete states with finite cells, N is a set of all cells in a neighborhood, and f is a local rule set.
+%
+%We define the cellular space L as the real space in which the sand castle exists. Its dimension number d is 3, and it's in the shape of a cube. Its state set S is $\{sand, water, empty\}$.
+%
+%The definition of cellular neighborhood N refers to the Moore Neighborhoods in the two-dimensional cellular space[3], where neighborhood radius r = 1. Namely, cells and their neighborhoods form a 3*3*3 cube. The schematic diagram is as follows:
+%
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=5cm]{/Users/ivk1442/Pictures/R1/layer.png}
+%	\caption{Cellular neighborhood diagram} 
+%\end{figure}
+%
+%	In Figure 6, the yellow cell in the middle is the research object, and the set of 26 other cells drawn around it is defined as the neighborhood. The neighborhood was divided into three layers, the lower layer (9 cells) was layer \uppercase\expandafter{\romannumeral1}, the middle layer (8 cells) was layer \uppercase\expandafter{\romannumeral2}, and the upper layer (9 cells) was layer \uppercase\expandafter{\romannumeral3}.
+%
+%
+%\subsubsection{Definition of Cellular Automata Update Rule Set}
+%\qquad
+%
+%The state update rule of cellular automata refers to the state transition function that determines the state of the cellular state at the next time according to the current state of the cellular and the state of the cellular in its neighborhood. The state update rule of cellular $S_i^{t}$ at time $t$ can be written as follows[2] ,
+%
+%\begin{equation}
+%	f:S_i^{t+1}=f(S_i^t, S_N^t).
+%\end{equation}
+%where $S_N^t$ is the neighborhood state combination at time $t$.
+%
+%In translating the actual physical model into cellular state update rules, we discussed the following issues:
+%
+%\begin{itemize}
+%	\item {\bf The possibility of upward movement of sand and water cell is omitted:}\\
+%	\qquad
+%	The sand cell and water cell tend to fall downward under the action of gravity, and the accidental upward movement has little influence on the overall state of the sand pile. Therefore, we assume that in a time element, the sand and water cells at the bottom of the sand pile can only move in the bottom plane, while other sand and water cells can only move in or down the local plane.
+%		
+%	\item {\bf A special case of sand-water state change: }\\
+%	\qquad
+%	When there are sand cells above the water cell and at least two of the four cells surrounding the water cell in layer II are not sand, the water cell becomes sand and the sand cell becomes empty. Figure 6 demonstrates the case:
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=10cm]{/Users/ivk1442/Pictures/R1_/rule.png}
+%	\caption{A special case of sand-water state change} 
+%\end{figure}
+%	\item {\bf How to tell if a cell is flushed by waves} \\
+%	\qquad
+%	We assume that when there are more than P water cells in the cellular neighborhood, the cellular is scoured by sea waves. Therefore, if W is used to represent the number of water cells in the neighborhood of a cell, when W>P, the empty cell will be occupied by water at the next time. For the sand cell, the force judgment is needed to determine whether it will be washed away by the wave at the next moment.
+%	
+%	\item {\bf Under what circumstances will a sand cell hit by a wave be washed away?} \\
+%	\qquad
+%	The sand force model in 4.1 is simplified under the background of cellular automata:
+%	
+%	\qquad
+%	The sand cell in question is represented by X. X is subject to the impact force F of waves, the resultant force $F_a$ of static friction forces of other grains, and the resultant force $F_s$ of capillary water forces on the horizontal plane. The expressions of these forces are shown in (3) (5) and (6).
+%	
+%	\qquad
+%	The force analysis diagram is shown in the figure below:
+%	\begin{figure}[h]
+%		\centering
+%		\includegraphics[width=6cm]{/Users/ivk1442/Pictures/R1_/force1.png}
+%		\caption{Force analysis diagram of a sand cell} 
+%	\end{figure}
+%	\qquad
+%	
+%	The cellular renewal rule is a function defined on the local cellular state and the neighborhood state at time $t$ Therefore, $F$, $F_A$ and $F_s$ obtained in 4.1 are transformed into:
+%	\begin{equation}
+%		F\propto W_{side} + \lambda_WW_{edge}.
+%	\end{equation}
+%	\begin{equation}
+%		F_A \propto \mu G_{side}+\lambda_GG_{edge}.
+%	\end{equation}
+%	\begin{equation}
+%		F_s \propto W_s.
+%	\end{equation}
+%	where $W_{side}$ is the number of water cells coplanar with X in the neighborhood, and $G_{side}$ is the number of other sand cells coplanar with X in the neighborhood. $\lambda_W$, $\lambda_G$ represents the ratio of the force on X between the coplanar cell and the cosided cell, and is evaluated at (0, 1). The $μ$ parameter describes the pressure exerted by the upper cell of X, which is proportional to the sum of all the sand cells and water cells directly above X. $W_s$ is the number of water cells capable of generating capillary water force on X in the X neighborhood.
+%	
+%	\qquad
+%	When the wave impact force on X is greater than the resultant force of its static friction force and capillary water force, that is, when the following formula is satisfied, X is washed away by the wave:
+%	\begin{equation}
+%		F>F_A+F_s.
+%	\end{equation}
+%	\qquad
+%	According to (8)(9)(10), the above formula can be converted to:
+%		\begin{equation}
+%		W_{side}+\lambda_WW_{edge}>\alpha\mu(G_{side}+\lambda_GG_{edge})+\beta W_s.
+%	\end{equation}
+%	where, $\alpha$, $\beta$, $\lambda_W$, $\lambda_G$, $\mu$ are undetermined parameters.
+%	
+%	\qquad
+%	Based on the discussion and assumptions above, we establish the rule set f:
+%	
+%	\begin{itemize}
+%		\item {\bf At time t, if X is an empty cell:}\\
+%		\textbf{1} \, If there is a water cell or sand cell above X, X transforms into a water cell or sand cell at time t+1. \\
+%		\textbf{2} \, If W>P, it turns into a water cell. \\
+%		\textbf{3} \, If none of the above conditions are satisfied, X stays empty.
+%		
+%		\item {\bf if X is an water cell:}\\
+%		\textbf{1} \, If there is an empty cell below X, it becomes an empty cell. \\
+%		\textbf{2} \, If a sand cell is above X, and at least two of the four surrounding cells in layer II of X neighborhood are not sand cells, then X becomes sand cell. \\
+%		\textbf{3} \, If none of the above conditions are satisfied, X remains a water cell.
+%		
+%		\item {\bf if X is an sand cell:}\\
+%		\textbf{1} \, If W>P, and $W_{side}+\lambda_WW_{edge}>\alpha\mu(G_{side}+\lambda_GG_{edge})+\beta W_s$ , then X is washed away by the waves and turns into a water cell.\\
+%		\textbf{2} \, If there is an empty cell below X, it becomes an empty cell. \\
+%		\textbf{3} \, If there is a water cell below X, and at least two of the four surrounding cells in layer II of this water cell neighborhood are not sand, then X becomes an empty cell.\\
+%		\textbf{4} \, If none of the above conditions are satisfied, X remains a water cell.
+%	\end{itemize}
+%\end{itemize}
+%
+%\subsection{Solving the Model Parameters of Cellular Automata}
+%Cellular automata A=(L,d,S,N,f), where there are unknown parameters $\alpha$, $\beta$,$\mu$,$\lambda_W$,$\lambda_G$ in local rule set f. We need to derive those values before using cellular automata model to model sandscastle foundation. We will discuss the values of the above five parameters below.
+%\begin{itemize}
+%	\item {\bf $\lambda_W$, $\lambda_G$}\,represent the ratio of the force on X between a cell sharing a common edge or common side with X.As is shown in the following figure, the force exerted by the common - sided cell is decomposed orthogonally, so $\lambda_W = \lambda_G = \frac{\sqrt{2}}{2}$.The force analysis is demonstrated in Figure 9.
+%	
+%	\begin{figure}[h]
+%		\centering
+%		\includegraphics[width=5cm]{/Users/ivk1442/Pictures/R1_/force2.png}
+%		\caption{Orthogonal decomposition of F} 
+%	\end{figure}
+%	
+%	
+%	\item $\mu$ is proportional to the sum of the number of sand cells and water cells directly above X. It is advisable to divide the height of sandscastle foundation into 5 layers, and take different $\mu$ values for each layer.
+%	$
+%	\mu = 
+%	\begin{Bmatrix}
+%		\\ =1.2,\ for \ the \ bottom\  layer  
+%		\\ =1.1,\ for \ the \ fourth\ layer
+%		\\ =1.0,\ for \ the \ middle\ layer
+%		\\ =0.9,\ for\ the\ second\ layer
+%		\\ =0.8,\ for\ the\ upmost\ layer
+%	\end{Bmatrix}
+%	$
+%	\item $alpha$ is the ratio of wave force $F$ and  internal friction $Fa$ between sand grains.To ensure that a sand cell can be washed away when there are enough water cells around it, a reasonable value of $\alpha$ is required. Let's talk about a worst-case scenario, where \,$W_{side}=1$, $W_{edge} = 4$, $G_{side}=4$, $G_{edge}=5$, $W_s=0$.Substitute the equations above into this:
+%	\begin{equation}
+%		W_{side}+\lambda_WW_{edge}>\alpha\mu(G_{side}+\lambda_GG_{edge})+\beta W_s.
+%	\end{equation}
+%	We get $\alpha=0.508$.Therefore, the value of $\alpha$ must be greater than 0.508, which is 0.7 in this paper. The rationality of the value is verified in subsection 8.1(Sensitivity Analysis).
+%	
+%	\item $\beta$ is the ratio of ocean wave force $F$ to capillary water force $F_s$. The capillary water force is less than that of sea wave, so the value of beta in this paper is 1.5. Similarly, the rationality of the value is verified in subsection 8.1(Sensitivity Analysis).
+%\end{itemize} 
+%
+%\subsection{Identify the Best 3-dimensional Geometric Shape}
+%
+%\subsubsection{Four Different Sandpile Geometry Shapes}
+%\qquad
+%In this paper, four different geometric shapes are considered as sandscastle foundation, namely cube, tetragonal pyramid, cylinder and cone. These four geometric shapes are shown in Figure 10-13.
+%
+%\begin{figure}[h]
+%	\centering
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R1/cube 0.png}
+%		\caption{Cube}
+%		\label{chutian1}%文中引用该图片代号
+%	\end{minipage}
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R1/rectangular pyramid 0.png}
+%		\caption{Tetrangonal pyramid}
+%		\label{chutian2}%文中引用该图片代号
+%	\end{minipage}
+%	%\qquad
+%	%让图片换行，
+%	
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R1/cylinder 0.png}
+%		\caption{Cylinder}
+%		\label{chutian3}%文中引用该图片代号
+%	\end{minipage}
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R1/cone 0.png}
+%		\caption{Cone}
+%		\label{chutian4}%文中引用该图片代号
+%	\end{minipage}
+%\end{figure}
+%
+%The sandcastles meet the following requirements:
+%\begin{itemize}
+%	\item Built on the same beach and are of the same distance from the sea.
+%	\item The types and amounts of sand used were roughly the same, with a 98:2 ratio of sand to water.
+%	\item The dimensions of the four geometric shapes are shown in Table 2.
+%	\begin{table}[h]
+%		\begin{center}
+%			\caption{The dimensions of the four geometric shapes}
+%			\begin{tabular}{ccccc}
+%				\hline
+%				\makebox[0.15\textwidth][c]{Shape}	&  \makebox[0.15\textwidth][c]{Cube} &
+%				\makebox[0.15\textwidth][c]{Tetrangonal pyramid}&
+%				\makebox[0.15\textwidth][c]{Cylinder}&
+%				\makebox[0.15\textwidth][c]{Cone}
+%				\\ \hline
+%				Size&$51^3$&$\frac{1}{3} \times 74^3$ &
+%				$28^2\times\pi\times 54$&$\frac{1}{3}\times 42^2\times \pi\times73$\\
+%				Volume&$132651$&$135074$&$132104$&$134849$\\
+%				\hline
+%			\end{tabular}
+%		\end{center}
+%	\end{table}
+%\end{itemize}
+%
+%\subsubsection{Solve the Optimal 3-dimensional Geometry}
+%\qquad
+%We use python to simulate the impact of sea waves on sand castles, and the residual rate of sand was calculated as the standard to evaluate different shapes. The program flow is shown in the figure below:
+%
+%\begin{figure}[htbp]
+%	\centering
+%	\includegraphics[width=8cm]{/Users/ivk1442/Pictures/R1/workflow.png}
+%	\caption{Work flow table of the program} 
+%\end{figure}
+%
+%\newpage
+%
+%It is worth noting that every time the cellular space is updated, the height of the wave needs to be changed. In this paper, it is assumed that the wave is a sine wave, and the wave equation is
+%\begin{equation}
+%	y=A+H\times sin(\omega t).
+%\end{equation}
+%where A is the average depth of sea water, H is the wave height, and w is the frequency of sea waves. Considering the beach for people to spend their holidays, the wave will not be too urgent, so $A = 0.1(m)$, $H = 0.05(m)$, and $\omega = \frac{\pi}{6}(rad)$.
+%
+%The simulation results of cellular automata are shown in the following figures:
+%\begin{figure}[htbp]
+%	\centering
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R1/cube 100.png}
+%		\caption{Cube,$t=100$}
+%	\end{minipage}
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R1/cube 200.png}
+%		\caption{Cube,$t=200$}
+%	\end{minipage}
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R1/rectangular pyramid 100.png}
+%		\caption{Tetrangonal pyramid,$t=100$}
+%	\end{minipage}
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R1/rectangular pyramid 200.png}
+%		\caption{Tetrangonal pyramid,$t=200$}
+%	\end{minipage}
+%
+%
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R1/cylinder 100.png}
+%		\caption{Cylinder, $t=100$}
+%	\end{minipage}
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R1/cylinder 200.png}
+%		\caption{Cylinder, $t=200$}
+%	\end{minipage}
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%	\centering
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R1/cone100.png}
+%		\caption{Cone, $t=100$}
+%	\end{minipage}
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R1/cone200.png}
+%		\caption{Cone, $t=200$}
+%	\end{minipage}
+%\end{figure}
+%
+%As is shown in Figure 23, the residual rate of sand in different shapes of sand castle varies with the simulation time. The erosion speed of cube is the fastest, far exceeding that of the other three types; the erosion speed of circular column is slightly higher than that of quadpyramid; the erosion speed of cone is the slowest, and 82\% of sand can still be maintained after the simulation.
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=10cm]{/Users/ivk1442/Pictures/R1/trend.jpg}
+%	\caption{Cellular neighborhood diagram} 
+%\end{figure}
+%In summary, we can conclude that the 3D geometry with the highest resistance to seawater shock is a cone. According to fluid mechanics, it is not difficult to speculate that shapes similar to "rocket heads" or "fishes" can slow the rate of seawater erosion. Therefore, we changed the three-dimensional geometry into an elliptical cylinder, and ran the sandcastle erosion model again, and we got an erosion rate of 5.49\% in the same time. This fully validates our hypothesis.
+%
+%\section{Optimize the Sand-water Proportion}
+%
+%According to the sand force model and cellular automata model established above, the numerical simulation is carried out to optimize the sand water ratio. We chose the cone as the shape of the sand castle, keeping the parameters of the model unchanged, only changing the sand-water mixing ratio of the sand castle. To reduce the calculation amount of the model, as long as the simulation time reaches 100, the simulation is considered to be over, and the optimal sand-water mixing ratio is confirmed by comparing the residual rate of gravel. The results of numerical simulation using python are shown in Figure 24.
+%
+%Looking at the curve, with the increase of the sand-water mixing ratio, the residual percentage of sand increases first and then decreases. When the water proportion is between 1\% and 3\%, it can be found that the residual percentage of sand is almost constant; when the water proportion exceeds 4\%, the residual percentage of sand will decline rapidly. At 10 o 'clock, the residual percentage of gravel is 65\%. To sum up, To build a longer-lasting sandcastle, the sand-water mixing ratio should be controlled between $99:1$ and $97:3$.
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=10cm]{/Users/ivk1442/Pictures/R2/2-1.jpg}
+%	\caption{Optimal sand-to water proportion for the castle foundation} 
+%\end{figure}
+%
+%\section{Adapt the Sandpile Simulation Model to Raining Conditions}
+%
+%\subsection{Rainfall Force Analysis Model}
+%Requirement 3 asks us to consider the effect of rainfall based on the optimal three-dimensional sandcastle foundation from Requirement 1. Considering that the essence of rainfall is that water drops with certain mass fall from the air to the sand castle, without considering the influence of wind, we believe that the rain drops fall vertically from the air, after touching the sand castle, it will produce vertical impact force on the sand gravel at the contact place. When the sand in contact with raindrop is affected by the impact force of rain $F_r$, it is also affected by the static friction force of surrounding sand $F_a$ and the capillary water force of surrounding water $F_s$. Compared with the impact force of raindrop, the gravity of sand itself is very small and can be ignored. Figure 25 demonstrates results of the force analysis.
+%
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=10cm]{/Users/ivk1442/Pictures/R3/rain.png}
+%	\caption{Force analysis of rain beating the sandpile} 
+%\end{figure}
+%
+%Meanwhile, we believe that the impact force of rain on a sand grain is related to the number of water cells in the surrounding layers II and III, and the following equation is satisfied:
+%
+%\begin{equation}
+%	F_r\propto W_{II,III,side}+\lambda_WW_{II,III,edge}.
+%\end{equation}
+%where $W_{II,III,side}$ is the number of water cells adjacent to the surface of the sand cell in layers II and III around the sand cell; $W_{II,III,edge}$ is the number of water cells adjacent to the edge of the sand cell in layers II and III around the sand cell; and $\lambda_W$ is a undetermined real number ranging from 0 to 1. 
+%
+%\subsection{Adjust Cellular Automata Rules And Parameters}
+%\qquad
+%The update rule of the cellular automata constructed in 4.2.2 should be updated accordingly after considering the impact of rainfall. We add a clause to the update rule of the sand cell:
+%
+%We believe that when the number of water cells in layers II and III around a sand cell is more than 7, that is, when the following formula is satisfied, it will be affected by the impact force of rain:
+%
+%\begin{equation}
+%	W_{II,III}\geq 7.
+%\end{equation}
+%where $W_{II,III}$ is the number of water cells in neiborhood layers II and III around a sand cell.
+%
+%At this time, when the impact force of rain on the sand cell is greater than the resultant force of static frictional force of surrounding sand cell and capillary water force of surrounding water cell, that is, when the following formula is satisfied, the sand cell will be washed away by rain:
+%\begin{equation}
+%	F_r>F_A+F_s.
+%\end{equation}
+%where $F_r$ Is the impact force of rain on the sand cell, $F_A$ is the resultant force of static frictional force of surrounding sand cells on it, and $F_s$ is the resultant force of surrounding water cells on capillary water.
+%
+%According to equations (8)(9) and (10), (16) can be transformed to:
+%\begin{equation}
+%	W_{II,III,side}+\lambda_WW_{II,III,edge}>\alpha^{'} \mu(G_{side}+\lambda_GG_{edge})+\beta^{'} W_s.
+%\end{equation}
+%where $G_{side}$ is the number of sand cells adjacent to the surface of the sand cell; $G_{edge}$ is the number of sand cells adjacent to the edge of the sand cell; $W_s$ is the number of water cells adjacent to the sand cell that can provide the capillary water force, and $\lambda_W$, $\lambda_G$ are real numbers ranging from 0 to 1. The $\mu$ parameter describes the pressure exerted by the upper cell of X, which is proportional to the sum of the number of sand cells and water cells directly above X, and $\alpha^'$, $\beta^'$ are undetermined parameters.
+%
+%The updated rule set of sand cell X is as follows:
+%
+%\begin{itemize}
+%	\item \textbf{1} \, If W>P, and $W_{side}+\lambda_WW_{edge}>\alpha\mu(G_{side}+\lambda_GG_{edge})+\beta W_s$ , then X is washed away by the waves and turns into a water cell.
+%	\item \textbf{2} \, If $W_{II,III}\geq7$ and $W_{II,III,side}+\lambda_WW_{II,III,edge}>\alpha^'\mu(G_{side}+\lambda_GG_{edge})+\beta^'W_s$ , then X is washed away by rain.
+%	\item \textbf{3} \, If there is a water cell below X, and at least two of the four surrounding cells in layer II of this water cell neighborhood are not sand, then X becomes an empty cell.
+%	\item \textbf{4} \, If an empty cell or a water cell is below X, then X turns to empty cell or water cell respectively.
+%	\item \textbf{5} \, If none of the conditions above are satisfied, X remains a sand cell.
+%\end{itemize}
+%
+%\subsection{Solve the Optimal Geometry When It Rains}
+%Using the idea of parameter determination in 4.3, we assign values of 0.45 and 1.5 to $\alpha^'$, $\beta^'$, respectively. And we will verify the rationality of values in section 8.1 (sensitivity analysis).
+%
+%Based on the solving idea of 4.4.2, the shapes of sand castles are cube, tetrapyramid, cylinder and cone respectively. The impact of sea waves and raindrops on sand castles is simulated by python, and the residual rate of sand is calculated as the standard to evaluate different shapes. The program flow is demonstrated in the figure below:
+%
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=10cm]{/Users/ivk1442/Pictures/R3/workflow.png}
+%	\caption{Workflow of the program} 
+%\end{figure}
+%
+%Different from 4.4.2 whenever the cellular space is updated, raindrops need to be generated at the top layer of the cellular space at any time to simulate rainfall. The python simulation results are shown in Figure 27-34.
+%\newpage
+%\begin{figure}[h]
+%	\centering
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R3/3 cube 1.png}
+%		\caption{Cube,$t=50$}
+%	\end{minipage}
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R3/3 cube 2.png}
+%		\caption{Cube,$t=110$}
+%	\end{minipage}
+%	%\qquad
+%	%让图片换行，
+%	
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R3/rp.png}
+%		\caption{Tetrangonal pyramid,$t=60$}
+%	\end{minipage}
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R3/rp2.png}
+%		\caption{Tetrangonal pyramid,$t=130$}
+%	\end{minipage}
+%	
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R3/3 cylinder 1.png}
+%		\caption{Cylinder, $t=50$}
+%	\end{minipage}
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R3/3 cylinder 2.png}
+%		\caption{Cylinder, $t=110$}
+%	\end{minipage}
+%	
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R3/3 cone 1.png}
+%		\caption{Cone, $t=80$}
+%	\end{minipage}
+%	\begin{minipage}{0.49\linewidth}
+%		\centering
+%		\includegraphics[width=0.5\linewidth]{/Users/ivk1442/Pictures/R3/3 cone 2.png}
+%		\caption{Cone, $t=150$}
+%	\end{minipage}
+%\end{figure}
+%
+%The change law of sand residual rate of different shapes of sand castle with simulation time is shown in Figure 35: 
+%
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=10cm]{/Users/ivk1442/Pictures/R3/trend.jpg}
+%	\caption{Workflow of the program} 
+%\end{figure}
+%
+%From Figure 35, we found that the highest sand residual rate (weakest anti-interference) is still the cube, and the lowest sand residual rate is cone. Furthermore, we found that the sand residual rate of the 3D geometry for the cylinder type is generally higher than that for the cone type. This also accords with the relevant laws of fluid mechanics and structural mechanics, which shows that the model established is more reasonable.
+%
+%
+%\section{Furthur Discussions and Other Strategies}
+%
+%Above, we have modeled, solved and analyzed the effects of the three-dimensional geometry of the sand castle foundation and the sand-water mixing ratio of the sand castle foundation on the life of the sand castle. In addition, we believe that the following strategies can be adopted to extend the life of the sand castle:
+%\begin{itemize}
+%	\item {\bf Build the sandcastle further away from the water to increase its distance from the water.}\\
+%	With the distance between the sand castle and the water, the height of the wave eroding the sand castle and the speed of the wave eroding the sand castle can be reduced, which is conducive to extending the life of the sand castle;
+%	\item {\bf Use more sand to build the sandcastle foundation.}\\
+%	When other conditions are equal, the more sand used to build the sand castle foundation, the longer it takes for the waves to completely erode the sand castle foundation. Therefore, the more sand used to build the sand castle foundation is conducive to extending the life of the sand castle.
+%	\item {\bf Add additives or other materials to the materials used to build the sandcastle base.}\\
+%	The material we considered above is only composed of sand and water. We can add stones, plastics and other materials in it, which is conducive to increasing the degree of erosion resistance of the material, so as to extend the life of the sand castle;
+%	\item {\bf Dug diversion channels around the sandcastle.}\\
+%	The diversion channel can divert part of the seawater eroding the sand castle away from the sand castle, reduce the height of the wave eroding the sand castle, and thus reduce the speed of the wave eroding the sand castle, which is conducive to extending the life of the sand castle.
+%\end{itemize}
+%
+%\section{Sensitivity Analysis}
+%\subsection{Sensitivity Analysis of Requirement 1}
+%In requirement1, there are five parameters that need to be calibrated in the equation \ $W_{side}+\lambda_WW_{edge}>\alpha\mu(G_{side}+\lambda_GG_{edge})+\beta W_s$. Through the force analysis of sand cells, it can be seen that the values of $\lambda_W$ and $\lambda_G$ are reasonable. $\mu$ is assigned near 1, which has little impact on the results of the model.
+%
+%Therefore, our sensitivity analysis focuses on parameter $\alpha$ and $\beta$.
+%
+%We use Python to draw the sand residual rate when the simulation time is 100 within the range of ±15\% deviation of  and . The results are depicted in the following figure:
+%
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=10cm]{/Users/ivk1442/Pictures/Sen/sensitivity1.jpg}
+%	\caption{Error-diviation diagram of $\alpha$ and $\beta$} 
+%\end{figure}
+%
+%From the figure, when $\alpha$ and $\beta$ deviate the range of ±15\%, Model result error less than 1\%. Therefore, the model is not sensitive to $\alpha$ and $\beta$.
+%
+%\subsection{Sensitivity Analysis of Requirement 3}
+%Next, we analyze the model’s sensitivity to $\alpha^'$ and $\beta^'$ in requirement3. We use Python to perturb the model within 15\% of deviation from  $\alpha^'$ and $\beta^'$. The results are shown in Figure 37:
+%
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=10cm]{/Users/ivk1442/Pictures/Sen/sensitivity3.jpg}
+%	\caption{Error-diviation diagram of $3-\alpha$ and $3-\beta$} 
+%\end{figure}
+%
+%From the figure, when $\alpha^'$ and $\beta^'$ deviate the range of ±15\%, Model result error less than 0.25\%. Therefore, the model is not sensitive to $\alpha^'$ and $\beta^'$. Meanwhile, the curve is in a state of fluctuation, which may be caused by the fact that the initialization of cellular automata is a random process.
+%
+%\section{Model Evaluation and Furthur Discussion}
+%In conclusion, we designed a 3D cellular automaton to simulate ocean wave and rainfall sandcastle erosion. The rules of cellular automata are gradually perfected by analyzing the effect of ocean waves on sand and the friction between sand and gravel, the effect of raindrops on sand and the capillary water force of a small amount of water in sand castle, so that it can well simulate the erosion process of sea wave and rain on sand castle. By building sand castles with different geometric shapes, we found that conical sand castles were better at resisting sea water and rain damage, while cube shapes were least effective. In addition, To build a longer-lasting sandcastle, we have proposed other solutions, such as adding additives or other materials to the material used to build the sandcastle base, and digging an aqueduct around the sandcastle.
+%\subsection{Strengths}
+%
+%\begin{itemize}
+%	\item {\bf Accuracy of results} \ The more cells the automaton has, the better the simulation results will be. We used more than 130,000 sand cells to build model. In addition, the solution also accords with the relevant laws of fluid mechanics and structural mechanics, which shows that the result is more reasonable.
+%	\item {\bf Stability and high fault tolerance} \ Our model was tested for sensitivity and its stability was verified. We chose the parameters of average wave height and test with multiple shapes. These steps also improve the fault tolerance of the model.
+%	\item {\bf Universality} \ The model can be applied to similar scenarios by modifying parameters, such as stable accumulation of gravel and sliding of soil mass
+%\end{itemize}
+%
+%\subsection{Weaknesses}
+%\begin{itemize}
+%	\item {\bf Ignore the effects of some conditions} \ Ignore the impact of the enormous waves, so the applicability on the beech with violent waves needs to further improve the model. The assumptions may be not hold in some cases. There still be some controversy about our model.
+%	\item {\bf Accuracy to be improved} \ Limited to the limitation of equipment, the quality may not meet our higher expectations.
+%\end{itemize}
+%
+%%\\ \hspace*{\fill} \\
+%%\\ \hspace*{\fill} \\
+%
+%\begin{center}
+%	{\bf What kind of sandcastle lives the longest?}
+%\end{center}
+%
+%The beach has always been a popular place for people to travel and spend their holidays. The sand on the beach can bring people a lot of fun. Building sand castles with sand on the beach is a very interesting activity. When we walk on the beach, we often see all kinds of sandcastles, some big, some small, some exquisite and some grotesque. However, no matter what kind of sandcastle is, it will be hit by the waves, and some sand castles will be washed away in a single blow, while others will remain in their original shape after several shocks. What kind of sandcastle is better able to withstand the pounding of the waves? Here we ran a few computer simulations to find out.
+%
+%Firstly, different shapes of sand castles are different in their ability to withstand the pounding of waves. To compare the resistance of different sand castles to the impact of waves, we used a computer simulation to build four sand castles with roughly the same amount of sand: a cube, a pyramid, a cylinder, and a cone, and simulated crashing them with the same waves. The image below shows the four types of sand castles being buffeted by waves, with the cone-shaped sand castles being the most resistant.
+%
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=10cm]{/Users/ivk1442/Pictures/R1/trend.jpg}
+%\end{figure}
+%
+%Secondly, when we build a sandcastle, we add a certain amount of water to the sand in which the sandcastle is built. The proportion of water added also affects the sand castle's ability to withstand the impact of the waves. We used computer simulations to build sandcastles of the same size with sand mixed with different proportions of water, and simulated the same wave crashing at the same time. Finally, we determined that the sand castles made with sand mixed with 1\% to 3\% of water were the most resistant to wave crashing.
+%
+%So far we have simulated building sand castles on the beach under a clear sky, but what happens when it rains on the beach? So we use the computer to simulate the waves on a rainy day on the four shapes of the sand castle cube, pyramid, cylinder, cone impact. The image below shows the four shapes of sand castles subjected to waves on a rainy day, with the most wave-resistant sand castles still being conical.
+%
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=10cm]{/Users/ivk1442/Pictures/R3/trend.jpg}
+%\end{figure}
+%
+%After taking a look at our simulation results, I'm sure you'll want to try this out for yourself the next time you're at the beach. Hopefully, our results will give you some ideas for building longer-lived sandcastles, as well as more beachside fun.
+
+\newpage
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{References}
+\tolerance=500
+\begin{thebibliography}{99}
+	\bibitem{1}Mou Jinlei. Analysis of Design Rainstorm Pattern in Beijing [D]. Lanzhou Jiaotong University,2011.
+	\bibitem{2}Zhang Xinyi, Fang Guohua, Wen Xin, Ye Jian, Guo Yuxue. Statistical Model and Threshold Value Selection of Gridded Daily Precipitation Extremes in China[J]. Climate Change Research, 2017, 13(4): 346-355.
+	\bibitem{3}Tangang F, Chung J X, Juneng L, et al. Projected future changes in rainfall in Southeast Asia based on CORDEX–SEA multi-model simulations[J]. Climate Dynamics, 2020, 55: 1247-1267.
+	\bibitem{4} Shugart H H. A theory of forest dynamics. The ecological implications of forest succession models[M]. Springer-Verlag, 1984.
+	\bibitem{5}Moorcroft P R, Hurtt G C, Pacala S W. A method for scaling vegetation dynamics: the ecosystem demography model (ED)[J]. Ecological monographs, 2001, 71(4): 557-586.
+	\bibitem{6}Tilman D. Competition and biodiversity in spatially structured habitats[J]. Ecology, 1994, 75(1): 2-16.
+	\bibitem{7}Mendoza-González G, López-García J, Fernández-Nava Y, Ruiz-González AD. Predicting vegetation dynamics in grasslands based on environmental variables and a machine learning model[J]. Ecological Indicators, 2019, 107: 1055.
+	\bibitem{8}Zhang J, He HS, Zhang M, Yang J. Forest community succession prediction using machine learning algorithms. Forest Ecology and Management, 2020, 461: 117889.
+	\bibitem{9}Zheng X , Liu G H, Fu B J, et al. Effects of biodiversity and plant community composition on productivity in semiarid grasslands of Hulunbeir, Inner Mongolia, China[J]. Annals of the New York Academy of Sciences, 2010, 1195: E52-E64.
+	\bibitem{10}Wei, Y., Ma. Z., Zhou C. Classification and corresponding terms of favorable symbiosis between species [J]. Biological Bulletin, 2019, 3.
+	\bibitem{11}Zhang J, Shen X, Mu B, et al. Moderately prolonged dry intervals between precipitation events promote production in Leymus chinensis in a semi-arid grassland of Northeast China[J]. BMC Plant Biology, 2021, 21: 1-11.
+	\bibitem{12}Donat M G, Lowry A L, Alexander L V, et al. More extreme precipitation in the world’s dry and wet regions[J]. Nature Climate Change, 2016, 6(5): 508-513.
+	\bibitem{13}Daily Observational Data (noaa.gov)
+	\bibitem{14}Kang L, Han X, Zhang Z, et al. Grassland ecosystems in China: review of current knowledge and research advancement[J]. Philosophical transactions of the royal society B: Biological Sciences, 2007, 362(1482): 997-1008.
+	\bibitem{15}Wang H, Chen Y, Pan Y, et al. Assessment of candidate distributions for SPI/SPEI and sensitivity of drought to climatic variables in China[J]. International Journal of Climatology, 2019, 39(11): 4392-4412.
+	\bibitem{16}D'Odorico, P., Bhattachan, A., Davis, K. F., et al. Land use and climate change impacts on global soil erosion by water (2015-2070)[J]. Proceedings of the National Academy of Sciences, 2017, 114(36): 8932-8937.
+	\bibitem{17}Shannon C E. A mathematical theory of communication[J]. The Bell system technical journal, 1948, 27(3): 379-423.
+\end{thebibliography}
+
+
+
+
+
+
+
+
+
+
+
+%\begin{appendices}
+
+%\section{First appendix}
+
+%\end{appendices}
+\end{document}
+%%
+%% This work consists of these files mcmthesis.dtx,
+%%                                   figures/ and
+%%                                   code/,
+%% and the derived files             mcmthesis.cls,
+%%                                   mcmthesis-demo.tex,
+%%                                   README,
+%%                                   LICENSE,
+%%                                   mcmthesis.pdf and
+%%                                   mcmthesis-demo.pdf.
+%%
+%% End of file `mcmthesis-demo.tex'.

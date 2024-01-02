@@ -1,0 +1,35 @@
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Problem Background}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Literature Review}{3}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Our Work}{4}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Preparation of the models}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Problem Analysis}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Global Assumptions and Justifications}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Notations}{6}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Comprehensive Model of Community Succession Under Drought}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Probability Distribution Model of Rainfall in Semi-arid Grasslands}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}The Vitality-Rainfall Model}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Community Succession Model Based on Reproduction-competition Trade-off}{9}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Model Assumption}{9}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}The Reproduction and Mortality Trade-off for Individual Species}{9}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}The Reproduction - competition Trade-off for Multiple Species}{11}{subsubsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.4}Drought Adaptation Indicators}{12}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Model Summary}{12}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Model Simulation Results and Conclusions}{13}{section.4}%
+\contentsline {subsection}{\numberline {4.1}The simulation Algorithm}{13}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Impact of Species Numbers}{14}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Impact of Species Type}{15}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Impact of the Frequency and Severity of Droughts}{16}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Impact of Pollution and Habitat Reduction}{17}{subsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.5.1}Model Correction}{17}{subsubsection.4.5.1}%
+\contentsline {subsubsection}{\numberline {4.5.2}Analysis of Results}{17}{subsubsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.6}Measures to Improve Long-term Viability and Other Influences}{17}{subsection.4.6}%
+\contentsline {section}{\numberline {5}Sensitivity Analysis}{18}{section.5}%
+\contentsline {section}{\numberline {6}Strengths and Weaknesses}{20}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Strengths}{20}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Weaknesses}{20}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Conclusion}{21}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Model Extension and Furthur Discussion}{21}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Model Extension}{21}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Furthur Discussion}{21}{subsection.7.2}%
+\contentsline {section}{References}{22}{section*.1}%
